@@ -2,3 +2,6 @@ venv/
 .idea/
 __pycache__/
 instance/
+flask_demo.egg-info/
+.pytest_cache/
+.coverage

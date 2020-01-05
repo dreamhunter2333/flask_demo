@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
-from flask_demo import create_app
+from setuptools import find_packages, setup
 
-app = create_app()
-
-if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=9999)
+setup(
+    name='flask_demo',
+    version='1.0.0',
+    packages=find_packages(),
+    include_package_data=True,
+    zip_safe=False,
+    install_requires=[
+        'flask',
+    ],
+)
