@@ -5,3 +5,4 @@ instance/
 flask_demo.egg-info/
 .pytest_cache/
 .coverage
+uploads/

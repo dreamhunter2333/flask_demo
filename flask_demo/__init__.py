@@ -40,4 +40,7 @@ def create_app(test_config=None):
     app.register_blueprint(blog.bp)
     app.add_url_rule('/', endpoint='index')
 
+    from . import upload_file
+    app.register_blueprint(upload_file.bp)
+
     return app
