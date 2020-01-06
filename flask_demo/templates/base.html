@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
     <h1>Flask_Demo</h1>
+    <a class="action" href="{{ url_for('blog.index') }}">Index</a>
     <ul>
         {% if g.user %}
         <li><span>{{ g.user['username'] }}</span>
@@ -12,6 +13,7 @@
         <li><a href="{{ url_for('auth.login') }}">Log In</a>
             {% endif %}
     </ul>
+    <a class="action" href="{{ url_for('upload.upload_file') }}">Upload File</a>
 </nav>
 <section class="content">
     <header>

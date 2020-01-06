@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method=post enctype=multipart/form-data>
+    <h1>Upload new File</h1>
+    <img src="{{ img }}" style="width: 100%; height: auto;"/>
+    <input type=file name=file>
+    <input type=submit value=Upload>
+</form>
+{% endblock %}
