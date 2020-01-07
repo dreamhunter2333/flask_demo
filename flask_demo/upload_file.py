@@ -4,10 +4,9 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
 from werkzeug.utils import secure_filename
-from flask import send_from_directory
 
 
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 bp = Blueprint('upload', __name__)
 UPLOAD_FOLDER = bp.root_path + '/../uploads/'
 
@@ -35,15 +34,12 @@ def upload_file():
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(UPLOAD_FOLDER, filename))
-            return render_template('file/file.html', img='/uploads/' + filename)
-            return redirect(url_for('upload.uploaded_file', filename=filename))
+        if not file or not allowed_file(file.filename):
+            flash('No selected file')
+            return redirect(request.url)
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(UPLOAD_FOLDER, filename))
+        return render_template('file/file.html', img='/uploads/' + filename)
 
     return render_template('file/file.html')
 
-
-@bp.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(UPLOAD_FOLDER, filename)
