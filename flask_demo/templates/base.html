@@ -2,18 +2,17 @@
 <title>{% block title %}{% endblock %} - Flask_Demo</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
-    <h1>Flask_Demo</h1>
-    <a class="action" href="{{ url_for('blog.index') }}">Index</a>
+    <h1><a href="{{ url_for('blog.index') }}">Flask_Demo</a></h1>
     <ul>
         {% if g.user %}
         <li><span>{{ g.user['username'] }}</span>
         <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+        <li><a href="{{ url_for('upload.upload_file') }}">Upload File</a>
             {% else %}
         <li><a href="{{ url_for('auth.register') }}">Register</a>
         <li><a href="{{ url_for('auth.login') }}">Log In</a>
             {% endif %}
     </ul>
-    <a class="action" href="{{ url_for('upload.upload_file') }}">Upload File</a>
 </nav>
 <section class="content">
     <header>

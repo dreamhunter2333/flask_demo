@@ -4,6 +4,7 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
 from werkzeug.utils import secure_filename
+from flask import send_from_directory
 
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -43,3 +44,7 @@ def upload_file():
 
     return render_template('file/file.html')
 
+
+@bp.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(UPLOAD_FOLDER, filename)
