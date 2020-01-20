@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form method=post enctype=multipart/form-data>
-    <h1>Upload new File</h1>
-    <img src="{{ img }}" style="width: 100%; height: auto;"/>
-    <br/>
-    <input type=file name=file accept="image/gif, image/jpeg, image/jpg">
-    <input type=submit value=Upload>
+<div class="container">
+<form method="post" enctype=multipart/form-data class="form-horizontal center-block" role="form">
+  <div class="form-group">
+    <label for="file">Chose Image</label>
+    <input type="file" class="form-control-file" accept="image/*" name="file" id="file">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <div class="text-center">
+    <img src="{{ img }}" class="rounded"/>
+  </div>
 </form>
+</div>
 {% endblock %}
