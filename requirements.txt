@@ -1,6 +1,5 @@
 Flask==1.1.1
 Werkzeug==0.16.0
 Click==7.0
-Flask-Bootstrap==3.3.7.1
 pytest
 coverage
