@@ -3,38 +3,48 @@
 <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="/static/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
 <link href="/static/bootstrap/css/bootstrap-reboot.min.css" rel="stylesheet">
-<div class="container">
-    <nav class="navbar bg-primary">
-        <a href="{{ url_for('blog.index') }}" class="btn btn-primary" role="button" aria-pressed="true">Home</a>
-        <div class="btn-group float-right">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {% if g.user %}
-            {{ g.user['username'] }}
-            {% else %}
-            登录
-            {% endif %}
-        </button>
-        <div class="dropdown-menu">
-            {% if g.user %}
-            <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Log Out</a>
-            {% else %}
-            <a class="dropdown-item" href="{{ url_for('auth.login') }}">Log In</a>
-            <a class="dropdown-item" href="{{ url_for('auth.register') }}">Register</a>
-            {% endif %}
-        </div>
-      </div>
-    </nav>
+<nav class="navbar bg-primary">
+    <a href="{{ url_for('blog.index') }}" class="btn btn-primary" role="button" aria-pressed="true">Home</a>
+    <div class="btn-group my-sm-0">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {% if g.user %}
+        {{ g.user['username'] }}
+        {% else %}
+        登录
+        {% endif %}
+    </button>
+    <div class="dropdown-menu dropdown-menu-right">
+        {% if g.user %}
+        <a class="dropdown-item" href="{{ url_for('auth.logout') }}">登出</a>
+        {% else %}
+        <a class="dropdown-item" href="{{ url_for('auth.login') }}">登录</a>
+        <a class="dropdown-item" href="{{ url_for('auth.register') }}">注册</a>
+        {% endif %}
+    </div>
+  </div>
+</nav>
     <section class="content">
         <header>
             {% block header %}{% endblock %}
         </header>
+        <div class="container">
         {% for message in get_flashed_messages() %}
-        <div class="flash">{{ message }}</div>
+        <div class="flash">
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        </div>
         {% endfor %}
         {% block content %}{% endblock %}
+        </div>
     </section>
-</div>
 <script type="text/javascript" src="/static/jquery-3.4.1.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/popper.min.js" charset="UTF-8"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 <script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/bs-custom-file-input.min.js"></script>
+<script>
+$(document).ready(function () {
+  bsCustomFileInput.init()
+})
+</script>
