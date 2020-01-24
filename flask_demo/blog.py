@@ -71,8 +71,9 @@ def create():
             ' VALUES (?, ?, ?, ?)',
             (title, body, g.user['id'], filename_uuid)
         )
+        data_id = db.execute('SELECT LAST_INSERT_ROWID();').lastrowid
         db.commit()
-        return redirect(url_for('blog.index'))
+        return show(data_id)
 
     return render_template('blog/create.html')
 
@@ -131,7 +132,7 @@ def update(id):
                 (title, body, filename_uuid, id)
             )
             db.commit()
-            return redirect(url_for('blog.index'))
+            return show(id)
 
     return render_template('blog/update.html', post=post)
 
@@ -148,11 +149,11 @@ def delete(id):
 
 @bp.route('/<int:id>/show', methods=('GET',))
 def show(id):
-    post = get_post(id)
+    post = get_post(id, check_author=False)
     if not post:
         return redirect(url_for('blog.index'))
     exts = ['markdown.extensions.extra', 'markdown.extensions.codehilite','markdown.extensions.tables','markdown.extensions.toc']
-    markdown_body = markdown.markdown(post['body'], extensions=exts)
+    markdown_body = markdown.markdown(post['body'], extensions=exts) if post['body'] else ''
     template = render_template('/blog/show.html', post=post, markdown_body=markdown_body)
     return template.replace('markdown_body', markdown_body)
 

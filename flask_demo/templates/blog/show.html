@@ -7,14 +7,11 @@
 {% block content %}
 <form method="post" enctype=multipart/form-data>
     <div class="form-group">
-    {% if g.user['id'] == post['author_id'] %}
-    <a class="btn btn-primary" role="button" aria-pressed="true" href="{{ url_for('blog.update', id=post['id']) }}">编辑</a>
-    {% endif %}
+        {% if g.user['id'] == post['author_id'] %}
+        <a class="btn btn-primary btn-sm" role="button" aria-pressed="true" href="{{ url_for('blog.update', id=post['id']) }}">编辑</a>
+        {% endif %}
     </div>
     <div class="my-3 p-3 bg-white rounded shadow">
-      <div class="form-group">
-          <h5>{{ post['title'] }}</h5>
-      </div>
         markdown_body
     </div>
 </form>
