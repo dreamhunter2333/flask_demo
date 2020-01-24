@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-CN"><head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>{% block title %}{% endblock %} - 博客</title>
 <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="/static/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
@@ -47,14 +48,14 @@
             {% block content %}{% endblock %}
         </main>
     </section>
+    <script type="text/javascript" src="/static/js/jquery-3.4.1.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/static/js/popper.min.js" charset="UTF-8"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/bs-custom-file-input.min.js"></script>
+    <script>
+    $(document).ready(function () {
+      bsCustomFileInput.init()
+    })
+    </script>
 </body>
-<script type="text/javascript" src="/static/js/jquery-3.4.1.min.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/static/js/popper.min.js" charset="UTF-8"></script>
-<script src="/static/bootstrap/js/bootstrap.min.js"></script>
-<script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/static/js/bs-custom-file-input.min.js"></script>
-<script>
-$(document).ready(function () {
-  bsCustomFileInput.init()
-})
-</script>
