@@ -1,43 +1,53 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - Flask_Demo</title>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<title>{% block title %}{% endblock %} - 博客</title>
 <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="/static/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
 <link href="/static/bootstrap/css/bootstrap-reboot.min.css" rel="stylesheet">
-<nav class="navbar bg-primary">
-    <a href="{{ url_for('blog.index') }}" class="btn btn-primary" role="button" aria-pressed="true">Home</a>
-    <div class="btn-group my-sm-0">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {% if g.user %}
-        {{ g.user['username'] }}
-        {% else %}
-        登录
-        {% endif %}
-    </button>
-    <div class="dropdown-menu dropdown-menu-right">
-        {% if g.user %}
-        <a class="dropdown-item" href="{{ url_for('auth.logout') }}">登出</a>
-        {% else %}
-        <a class="dropdown-item" href="{{ url_for('auth.login') }}">登录</a>
-        <a class="dropdown-item" href="{{ url_for('auth.register') }}">注册</a>
-        {% endif %}
-    </div>
-  </div>
-</nav>
+<link rel="icon" href="/static/favicon.ico">
+<body>
+    <nav class="navbar bg-primary">
+        <a href="{{ url_for('blog.index') }}" class="btn btn-primary" role="button" aria-pressed="true">首页</a>
+        <div class="btn-group my-sm-0">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {% if g.user %}
+                {{ g.user['username'] }}
+                {% else %}
+                登录/注册
+                {% endif %}
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                {% if g.user %}
+                <a class="dropdown-item" href="{{ url_for('auth.logout') }}">登出</a>
+                {% else %}
+                <a class="dropdown-item" href="{{ url_for('auth.login') }}">登录</a>
+                <a class="dropdown-item" href="{{ url_for('auth.register') }}">注册</a>
+                {% endif %}
+        </div>
+      </div>
+    </nav>
     <section class="content">
         <header>
-            {% block header %}{% endblock %}
-        </header>
-        <div class="container">
-        {% for message in get_flashed_messages() %}
-        <div class="flash">
-            <div class="alert alert-danger" role="alert">
-                {{ message }}
+            <div class="nav-scroller bg-white shadow-sm">
+              <nav class="nav nav-underline">
+                {% block header %}{% endblock %}
+              </nav>
             </div>
-        </div>
-        {% endfor %}
-        {% block content %}{% endblock %}
-        </div>
+            <br/>
+        </header>
+        <main role="main" class="container">
+            {% for message in get_flashed_messages() %}
+            <div class="flash text-center rounded shadow-sm">
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            </div>
+            {% endfor %}
+            {% block content %}{% endblock %}
+        </main>
     </section>
+</body>
 <script type="text/javascript" src="/static/jquery-3.4.1.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/popper.min.js" charset="UTF-8"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>

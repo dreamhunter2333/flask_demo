@@ -1,4 +1,0 @@
-include flask_demo/flask_demo.sql
-graft flask_demo/static
-graft flask_demo/templates
-global-exclude *.pyc

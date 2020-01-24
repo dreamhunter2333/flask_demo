@@ -3,3 +3,4 @@ Werkzeug==0.16.0
 Click==7.0
 pytest
 coverage
+markdown

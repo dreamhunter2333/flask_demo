@@ -1,8 +1,6 @@
 venv/
-.idea/
+.*
 __pycache__/
-instance/
-flask_demo.egg-info/
+database/
+images/
 .pytest_cache/
-.coverage
-uploads/

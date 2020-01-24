@@ -3,25 +3,19 @@ import os
 from flask import Flask
 
 
-def create_app(test_config=None):
+def create_app():
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
+    database_path = ''.join([app.root_path, '/../database/'])
     app.config.from_mapping(
         DEBUG=True,
         ENV='development',
         SECRET_KEY='dev',
-        DATABASE=os.path.join(app.instance_path, 'flask_demo.sqlite'),
+        DATABASE=os.path.join(database_path, 'flask_demo.sqlite'),
     )
-
-    if test_config is None:
-        # load the instance config, if it exists, when not testing
-        app.config.from_pyfile('config.py', silent=True)
-    else:
-        # load the test config if passed in
-        app.config.from_mapping(test_config)
     # ensure the instance folder exists
     try:
-        os.makedirs(app.instance_path)
+        os.makedirs(database_path)
     except OSError:
         pass
 
@@ -32,6 +26,7 @@ def create_app(test_config=None):
 
     from . import db
     db.init_app(app)
+    db.get_db()
 
     from . import auth
     app.register_blueprint(auth.bp)
@@ -39,8 +34,5 @@ def create_app(test_config=None):
     from . import blog
     app.register_blueprint(blog.bp)
     app.add_url_rule('/', endpoint='index')
-
-    from . import upload_file
-    app.register_blueprint(upload_file.bp)
 
     return app

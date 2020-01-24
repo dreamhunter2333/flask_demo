@@ -1,24 +1,24 @@
 {% extends 'base.html' %}
 
-{% block title %}Log In{% endblock %}
+{% block header %}
+<div class="nav-link">{% block title %}登录{% endblock %}</div>
+{% endblock %}
 
 {% block content %}
 <form method="post" enctype=multipart/form-data class="form-horizontal align-items-center" role="form">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">登录</h5>
-      </div>
-      <div class="modal-body text-center">
+  <div class="my-3 p-3 bg-white rounded shadow">
+    <div class="m-auto text-center" style="width: 20rem;">
+        <h5 class="card-title">登录</h5>
+        <br/>
         <div class="form-group">
-          <input class="form-control" name="username" id="username" placeholder="用户名" required>
+          <input class="form-control" name="username" id="username" placeholder="用户名" autofocus required>
         </div>
         <div class="form-group">
           <input type="password" class="form-control" name="password" id="password" placeholder="密码" required>
         </div>
-        <button type="submit" class="btn btn-primary col-sm-8">登录</button>
-      </div>
-      </div>
+        <button type="submit" class="btn btn-primary btn-block">登录</button>
+        <p class="mt-5 mb-3 text-muted">© 2017-2020</p>
     </div>
+  </div>
 </form>
 {% endblock %}

@@ -1,29 +1,35 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<nav class="navbar navbar-light bg-light">
+    <div class="nav-link">{% block title %}主页{% endblock %}</div>
     {% if g.user %}
-    <a class="btn btn-primary" role="button" aria-pressed="true" href="{{ url_for('blog.create') }}">新建</a>
+    <a class="nav-link" role="button" aria-pressed="true" href="{{ url_for('blog.create') }}">新建</a>
     {% endif %}
-    <a class="navbar-brand">{% block title %}Posts{% endblock %}</a>
-</nav>
-<br/>
 {% endblock %}
 
 {% block content %}
-{% for post in posts %}
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">{{ post['title'] }}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</h6>
-    <p class="card-text">{{ post['body'] }}</p>
-    {% if g.user['id'] == post['author_id'] %}
-    <a class="btn btn-primary" role="button" aria-pressed="true" href="{{ url_for('blog.update', id=post['id']) }}">编辑</a>
-    {% endif %}
+  <div class="d-flex align-items-center p-3 my-3 bg-purple rounded shadow-sm">
+    <div class="lh-100">
+      <h6 class="mb-0 lh-100">Bootstrap</h6>
+      <small>Since 2011</small>
+    </div>
   </div>
-</div>
-{% if not loop.last %}
-<hr>
-{% endif %}
-{% endfor %}
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h6 class="border-bottom border-gray pb-2 mb-0">最近更新</h6>
+    {% for post in posts %}
+    <a href="{{ url_for('blog.show', id=post['id']) }}">
+    <div class="media text-muted pt-3">
+      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <strong class="d-block text-gray-dark">
+                {{ post['title'] }} by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}
+            </strong>
+            {{ summary[post['id']] }}
+          </p>
+    </div>
+    </a>
+    {% endfor %}
+    <small class="d-block text-right mt-3">
+      <a href="#">All updates</a>
+    </small>
+  </div>
 {% endblock %}
