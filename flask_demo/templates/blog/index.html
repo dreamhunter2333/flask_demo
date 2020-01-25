@@ -28,8 +28,16 @@
     </div>
     </a>
     {% endfor %}
-    <small class="d-block text-right mt-3">
-      <a href="#">All updates</a>
+    <small class="d-block mt-3">
+        <nav tabindex="-1">
+          <ul class="pagination justify-content-center">
+            {% for page in pages %}
+            <li class="page-item">
+              <a class="page-link" href="{{ page['link'] }}">{{ page['name'] }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </nav>
     </small>
   </div>
 {% endblock %}

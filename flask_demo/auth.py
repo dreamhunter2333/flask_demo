@@ -16,13 +16,16 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        re_password = request.form['re_password']
         db = get_db()
         error = None
 
         if not username:
             error = 'Username is required.'
-        elif not password:
+        elif not password or not re_password:
             error = 'Password is required.'
+        elif password != re_password:
+            error = '两次输入密码不同。'
         elif db.execute(
             'SELECT id FROM user WHERE username = ?', (username,)
         ).fetchone() is not None:

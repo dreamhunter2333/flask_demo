@@ -34,7 +34,21 @@ def index():
         ' ORDER BY created DESC'
     ).fetchall()
     summary = {post['id']: post['body'][:100] if len(post['body']) > 100 else post['body'] for post in posts}
-    return render_template('blog/index.html', posts=posts, summary=summary)
+    pages = [{
+        'name': '上一页',
+        'page': '1',
+        'link': '/1'
+    },
+        {
+        'name': '2',
+        'link': '/2'
+    },
+        {
+            'name': '下一页',
+            'link': '/3'
+    },
+    ]
+    return render_template('blog/index.html', posts=posts, summary=summary, pages=pages)
 
 
 @bp.route('/create', methods=('GET', 'POST'))
