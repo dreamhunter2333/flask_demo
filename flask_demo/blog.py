@@ -132,7 +132,7 @@ def update(id):
                 (title, body, filename_uuid, id)
             )
             db.commit()
-            return show(id)
+            return redirect(url_for('blog.show', id=id))
 
     return render_template('blog/update.html', post=post)
 
