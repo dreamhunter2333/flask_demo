@@ -4,17 +4,34 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <title>{% block title %}{% endblock %} - 博客</title>
-        <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet"/>
         <link rel="icon" href="/static/icon/favicon.ico"/>
-        <link rel="manifest" href="/static/manifest.json">
-        <meta name="theme-color" content="#317cf6"/>
+        <link rel="manifest" href="/static/pwa/manifest.json">
+        <meta name="theme-color" content="#ffffff"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
         <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
         <meta name="apple-mobile-web-app-title" content="Flask Blog">
         <link rel="apple-touch-icon" href="/static/icon/flask.png"/>
         <meta name="application-name" content="Flask Blog"/>
-        <meta name="msapplication-TileColor" content="#317cf6"/>
+        <meta name="msapplication-TileColor" content="#ffffff"/>
         <meta name="msapplication-square612x612logo" content="/static/icon/flask.png"/>
+        <script type="text/javascript" src="/static/js/jquery-3.4.1.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="/static/bootstrap/js/bootstrap.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="/static/bootstrap/js/bootstrap.bundle.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="/static/js/bs-custom-file-input.js" charset="UTF-8"></script>
+        <script type="text/javascript" charset="UTF-8">
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function (registration) {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(function (err) {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+        </script>
     </head>
     <body>
         <nav class="navbar bg-primary">
@@ -57,28 +74,5 @@
                 {% block content %}{% endblock %}
             </main>
         </section>
-        <script type="text/javascript" src="/static/js/jquery-3.4.1.min.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="/static/js/popper.min.js" charset="UTF-8"></script>
-        <script src="/static/bootstrap/js/bootstrap.min.js"></script>
-        <script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="/static/js/bs-custom-file-input.min.js"></script>
-        <script>
-            $(document).ready(function () {
-              bsCustomFileInput.init()
-            })
-        </script>
-        <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function () {
-                navigator.serviceWorker.register('sw.js')
-                    .then(function (registration) {
-                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                    })
-                    .catch(function (err) {
-                        console.log('ServiceWorker registration failed: ', err);
-                    });
-            });
-        }
-        </script>
     </body>
 </html>

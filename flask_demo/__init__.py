@@ -5,10 +5,10 @@ from flask import Flask
 
 def create_app():
     # create and configure the app
-    app = Flask(__name__, instance_relative_config=True, static_folder='', static_url_path='')
+    app = Flask(__name__, static_folder='')
     database_path = ''.join([app.root_path, '/../database/'])
     app.config.from_mapping(
-        DEBUG=True,
+        DEBUG=False,
         ENV='development',
         SECRET_KEY='dev',
         DATABASE=os.path.join(database_path, 'flask_demo.sqlite'),
