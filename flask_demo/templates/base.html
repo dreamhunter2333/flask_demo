@@ -1,13 +1,20 @@
 <!doctype html>
 <html lang="zh-CN">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <title>{% block title %}{% endblock %} - 博客</title>
-        <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<!--        <link href="/static/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">-->
-<!--        <link href="/static/bootstrap/css/bootstrap-reboot.min.css" rel="stylesheet">-->
-        <link rel="icon" href="/static/icon/favicon.ico">
+        <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+        <link rel="icon" href="/static/icon/favicon.ico"/>
+        <link rel="manifest" href="/static/manifest.json">
+        <meta name="theme-color" content="#317cf6"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+        <meta name="apple-mobile-web-app-title" content="Flask Blog">
+        <link rel="apple-touch-icon" href="/static/icon/flask.png"/>
+        <meta name="application-name" content="Flask Blog"/>
+        <meta name="msapplication-TileColor" content="#317cf6"/>
+        <meta name="msapplication-square612x612logo" content="/static/icon/flask.png"/>
     </head>
     <body>
         <nav class="navbar bg-primary">
@@ -59,6 +66,19 @@
             $(document).ready(function () {
               bsCustomFileInput.init()
             })
+        </script>
+        <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('sw.js')
+                    .then(function (registration) {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(function (err) {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
         </script>
     </body>
 </html>
