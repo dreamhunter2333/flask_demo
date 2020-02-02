@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
 import uuid
-import markdown
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
