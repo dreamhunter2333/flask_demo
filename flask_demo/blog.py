@@ -87,7 +87,7 @@ def create():
         )
         data_id = db.execute('SELECT LAST_INSERT_ROWID();').lastrowid
         db.commit()
-        return show(data_id)
+        return redirect(url_for('blog.show', id=data_id))
 
     return render_template('blog/create.html')
 
@@ -166,10 +166,7 @@ def show(id):
     post = get_post(id, check_author=False)
     if not post:
         return redirect(url_for('blog.index'))
-    exts = ['markdown.extensions.extra', 'markdown.extensions.codehilite','markdown.extensions.tables','markdown.extensions.toc']
-    markdown_body = markdown.markdown(post['body'], extensions=exts) if post['body'] else ''
-    template = render_template('/blog/show.html', post=post, markdown_body=markdown_body)
-    return template.replace('markdown_body', markdown_body)
+    return render_template('blog/show.html', post=post)
 
 
 @bp.route('/image/<filename>')

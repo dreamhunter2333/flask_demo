@@ -2,6 +2,7 @@
 
 {% block header %}
     <link href="/static/css/github.css" rel="stylesheet">
+    <script type="text/javascript" src="/static/js/showdown.js" charset="UTF-8"></script>
     <div class="nav-link">{% block title %}查看 "{{ post['title'] }}"{% endblock %}</div>
 {% endblock %}
 
@@ -12,8 +13,16 @@
         <a class="btn btn-primary btn-sm" role="button" aria-pressed="true" href="{{ url_for('blog.update', id=post['id']) }}">编辑</a>
         {% endif %}
     </div>
-    <div class="my-3 p-3 bg-white rounded shadow">
-        markdown_body
-    </div>
+    <div name="body" style="display: none;" id="body">{{ post['body'] }}</div>
+    <div id="preview" class="my-3 p-3 bg-white rounded shadow"></div>
+    <script>
+        function mdSwitch() {
+            var mdValue = document.getElementById("body").innerHTML;
+            var converter = new showdown.Converter();
+            var html = converter.makeHtml(mdValue);
+            document.getElementById("preview").innerHTML = html;
+      }
+      mdSwitch();
+      </script>
 </form>
 {% endblock %}
